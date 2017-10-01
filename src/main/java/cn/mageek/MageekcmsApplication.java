@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfigurat
 //也可以在 application.properties 中
 // security.basic.enabled=false
 // management.security.enabled=false
+// 尚未尝试
 @SpringBootApplication(exclude={DataSourceAutoConfiguration.class,HibernateJpaAutoConfiguration.class,
         org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration.class})
 public class MageekcmsApplication {
