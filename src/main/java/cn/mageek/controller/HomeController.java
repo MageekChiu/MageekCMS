@@ -36,7 +36,7 @@ public class HomeController {
     public String localFormat(Locale locale){
         //直接进入首页就是 Home:CN；加了 ?lang=cn 或者 ?lang=en 就成了 Home:  ，亦即为空
         //但是 ?lang=cn 或者 ?lang=en 对于messages 的切换是管用的 可能前面那个拦截器影响了这个参数注入吧？
-        System.out.println("Home:"+locale.getCountry());
+//        System.out.println("Home:"+locale.getCountry());
 //        System.out.println("Home:"+locale.toString());
         //上面两行的验证结果就是 有 ?lang=cn 就是 空 和 cn 没有 ?lang=cn 就是 CN 和 zh_CN
 
