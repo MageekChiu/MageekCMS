@@ -5,9 +5,11 @@ import cn.mageek.pojo.Form;
 import jdk.nashorn.internal.ir.ReturnNode;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.util.Locale;
 
 @RequestMapping("/")
@@ -48,9 +50,15 @@ public class HomeController {
     }
 
     @RequestMapping(value = "form",method = RequestMethod.POST)
-    public String saveForm(Form form){
-        System.out.println(form.toString());
-        return "form";
+    public String saveForm(@Valid Form form,//这个form是表单传过来的，同时也能传给表单用于显示
+                           BindingResult bindingResult){//校验结果
+        if(bindingResult.hasErrors()){
+            return "form";
+        }else{
+            System.out.println(form.toString());
+            return "form";
+        }
+
     }
 
 }

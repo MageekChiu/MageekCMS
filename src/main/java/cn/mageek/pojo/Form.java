@@ -1,16 +1,23 @@
 package cn.mageek.pojo;
 
-import org.springframework.format.annotation.DateTimeFormat;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class Form {
+
+    @Size(min = 2,max = 20)
     private String name;
+    @Email
+    @NotEmpty
     private String email;
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @NotNull
     private LocalDate birthDate ;
     private List<String> hobbies;
 
