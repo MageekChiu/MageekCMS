@@ -1,6 +1,8 @@
 package cn.mageek.controller;
 
+import cn.mageek.util.ExceptionI18Message;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
@@ -8,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 
 import java.io.*;
 
@@ -27,7 +28,7 @@ public class UploadController {
     public String uploadImage(MultipartFile file,
     RedirectAttributes ra) throws IOException{
         if (file.isEmpty() || file.getSize()>0.5){
-            ra.addFlashAttribute("error","${uploadSizeError}");
+            ra.addFlashAttribute("error", ExceptionI18Message.getLocaleMessage("uploadSizeError") );//传递国际化消息
             return "redirect:/upload";
         }
         String imgName = file.getOriginalFilename();
