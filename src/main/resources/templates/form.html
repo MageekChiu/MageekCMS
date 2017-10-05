@@ -2,13 +2,13 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>我的表单</title>
+    <title th:text="#{profile.title}"> profile</title>
 </head>
 <body>
     <form th:action="@{/form}" th:object="${form}" method="post">
-        <input th:field="${form.name}" name="name" id="name" type="text" th:placeholder="姓名" th:errorclass="invalid" required="required" />
+        <input th:field="${form.name}" name="name" id="name" type="text" th:placeholder="#{name}" th:errorclass="invalid" required="required" />
         <div th:errors="*{name}" class="red-text">Error</div>
-        <input th:field="${form.email}" name="email" id="email" type="text" th:placeholder="email" th:errorclass="invalid" required="required" />
+        <input th:field="${form.email}" name="email" id="email" type="text" th:placeholder="#{email}" th:errorclass="invalid" required="required" />
         <div th:errors="*{email}" class="red-text">Error</div>
         <input th:field="${form.birthDate}" name="birthDate" id="birthDate" type="text" th:placeholder="${'生日:'+dateFormate}" th:errorclass="invalid" required="required" />
         <div th:errors="*{birthDate}" class="red-text">Error</div>

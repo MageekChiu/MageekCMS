@@ -23,7 +23,9 @@ public class CNLocalDateFormatter implements Formatter<LocalDate> {
 
     private static boolean isChina(Locale locale) {
 //        return Locale.US.getCountry().equals(locale.getCountry());
-        return Locale.CHINA.getCountry().equals(locale.getCountry());
+//        return Locale.CHINA.getCountry().equals(locale.getCountry());
+        System.out.println(Locale.CHINA.toString()+"::"+locale.toString());//无lang=cn zh_CN::zh_CN， 有的话就是 zh_CN::cn
+        return Locale.CHINA.toString().toUpperCase().contains(locale.toString().toUpperCase());
 
     }
 

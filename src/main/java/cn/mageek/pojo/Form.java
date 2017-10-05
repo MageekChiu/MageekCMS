@@ -1,7 +1,9 @@
 package cn.mageek.pojo;
 
+import cn.mageek.annotation.PastLocalDate;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.context.annotation.Scope;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -18,13 +20,14 @@ public class Form {
     @NotEmpty
     private String email;
     @NotNull
+    @PastLocalDate
     private LocalDate birthDate ;
     private List<String> hobbies;
 
-    //加了构造函数的话，表单的placeholder 就不管用了
+    //构造函数加了内容的话，表单的placeholder 就不管用了
     public Form() {
-        this.name = "空";
-        this.email = "空";
+        this.name = "";
+        this.email = "";
         this.birthDate = LocalDate.now();
         this.hobbies = new ArrayList<>();
     }
