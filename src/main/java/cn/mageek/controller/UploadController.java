@@ -27,7 +27,7 @@ public class UploadController {
     public String uploadImage(MultipartFile file,
     RedirectAttributes ra) throws IOException{
         if (file.isEmpty() || file.getSize()>0.5){
-            ra.addFlashAttribute("error","文件大小错误");
+            ra.addFlashAttribute("error","${uploadSizeError}");
             return "redirect:/upload";
         }
         String imgName = file.getOriginalFilename();
