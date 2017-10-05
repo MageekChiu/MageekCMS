@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>我的表单</title>
+</head>
+<body>
+    <form th:action="@{/form}" th:object="${form}" method="post">
+        <input th:field="${form.name}" name="name" id="name" type="text" th:placeholder="姓名"/>
+        <input th:field="${form.email}" name="email" id="email" type="text" th:placeholder="email"/>
+        <input th:field="${form.birthDate}" name="birthDate" id="birthDate" type="text" th:placeholder="${'生日:'+dateFormate}"/>
+        <!--<input th:field="${form.hobbies}" name="hobbies" id="hobbies" type="text" th:placeholder="爱好"/>-->
+        <button name="save" id="save" type="submit" > 提交</button>
+    </form>
+</body>
+</html>
