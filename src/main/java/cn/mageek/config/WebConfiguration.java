@@ -1,12 +1,16 @@
 package cn.mageek.config;
 
 import cn.mageek.date.CNLocalDateFormatter;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.ErrorPage;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.format.FormatterRegistry;
+import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.web.multipart.MultipartException;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -20,7 +24,7 @@ import java.util.Locale;
 @Configuration
 @EnableConfigurationProperties({PictureUploadProperties.class})//自定义属性
 public class WebConfiguration extends WebMvcConfigurerAdapter {
-    /* 日期格式化问题 */
+    /* 日期格式化、国际化问题 */
     @Override
     public void addFormatters(FormatterRegistry registry) {
         registry.addFormatterForFieldType(LocalDate.class, new CNLocalDateFormatter());
@@ -59,6 +63,15 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
 //        factory.setMaxRequestSize("128KB");
 //        return factory.createMultipartConfig();
 //    }
+
+    /* Jackson的日期问题 这样才不会显示成时间戳*/
+    @Bean
+    @Primary
+    public ObjectMapper objectMapper(Jackson2ObjectMapperBuilder builder) {
+        ObjectMapper objectMapper = builder.createXmlMapper(false).build();
+        objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+        return objectMapper;
+    }
 
 
     /* 中文乱码问题 */
