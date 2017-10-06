@@ -1,6 +1,7 @@
 package cn.mageek.config;
 
 import cn.mageek.date.CNLocalDateFormatter;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
@@ -19,6 +20,7 @@ import java.util.List;
 import java.util.Locale;
 
 @Configuration
+@EnableConfigurationProperties({PictureUploadProperties.class})
 public class WebConfiguration extends WebMvcConfigurerAdapter {
     /* 日期格式化问题 */
     @Override
