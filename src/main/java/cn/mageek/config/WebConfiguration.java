@@ -1,26 +1,24 @@
 package cn.mageek.config;
 
 import cn.mageek.date.CNLocalDateFormatter;
+import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.web.servlet.ErrorPage;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.web.multipart.MultipartException;
 import org.springframework.web.servlet.LocaleResolver;
-import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
-import java.nio.charset.Charset;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Locale;
 
 @Configuration
-@EnableConfigurationProperties({PictureUploadProperties.class})
+@EnableConfigurationProperties({PictureUploadProperties.class})//自定义属性
 public class WebConfiguration extends WebMvcConfigurerAdapter {
     /* 日期格式化问题 */
     @Override
@@ -47,6 +45,21 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(localeChangeInterceptor());
     }
+
+    /* 统一处理 MultipartException */
+//    @Bean
+//    public EmbeddedServletContainerCustomizer containerCustomizer() {
+//        return container -> container.addErrorPages(new ErrorPage(MultipartException.class, "/uploadError"));
+//    }
+
+//    @Bean
+//    public MultipartConfigElement multipartConfigElement() {
+//        MultipartConfigFactory factory = new MultipartConfigFactory();
+//        factory.setMaxFileSize("128KB");
+//        factory.setMaxRequestSize("128KB");
+//        return factory.createMultipartConfig();
+//    }
+
 
     /* 中文乱码问题 */
 //    //原来不是乱码问题 而是新建的这个 message_cn 居然是gb2312 要把idea文件默认格式改为utf8才行
