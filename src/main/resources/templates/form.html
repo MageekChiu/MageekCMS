@@ -1,10 +1,22 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="UTF-8"/>
     <title th:text="#{profile.title}"> profile</title>
 </head>
 <body>
+
+    <div sec:authorize="hasRole('ROLE_ADMIN')" >
+        <b th:text="#{adminMsg}"></b>
+    </div>
+    <div sec:authorize="isAuthenticated()">
+        You are logged as <b sec:authentication="name">name</b> with roles <span sec:authentication="authorities">role</span>
+        -
+        <form th:action="@{/logout}" method="post" style="display: inline-block">
+            <input type="submit" value="Sign Out"/>
+        </form>
+        <hr/>
+    </div>
     <form th:action="@{/form}" th:object="${form}" method="post">
         <input th:field="${form.name}" name="name" id="name" type="text" th:placeholder="#{name}" th:errorclass="invalid" required="required" />
         <div th:errors="*{name}" class="red-text">Error</div>
