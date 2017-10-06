@@ -79,7 +79,6 @@ public class UploadController {
         response.setHeader("Content-Type", URLConnection.guessContentTypeFromName(picturePath.getFilename()));//默认写在配置里面，但是根据用户上传进行变化
         IOUtils.copy(picturePath.getInputStream(), response.getOutputStream());
 
-
     }
 
     //统一处理该控制器的IOException
@@ -96,6 +95,7 @@ public class UploadController {
     // 设为40 选一个 47的也不行 ，看样子是传了2次
     // 设为40 可以传39的，所以这个值还是设大一点好
     // 设为40 传48的 使用 ControllerAdvice 拦截测试可以清楚的看见onUploadError出现了两次，MultipartException:::也出现了两次 紧随其后 所以的确都拦截了两次
+    // 答案  Handling MultipartException with Spring Boot and display error page  https://stackoverflow.com/questions/29363705/handling-multipartexception-with-spring-boot-and-display-error-page
     @RequestMapping("uploadError")
     public ModelAndView onUploadError(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView("uploadImg");

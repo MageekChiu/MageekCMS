@@ -47,10 +47,10 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
     }
 
     /* 统一处理 MultipartException */
-//    @Bean
-//    public EmbeddedServletContainerCustomizer containerCustomizer() {
-//        return container -> container.addErrorPages(new ErrorPage(MultipartException.class, "/uploadError"));
-//    }
+    @Bean
+    public EmbeddedServletContainerCustomizer containerCustomizer() {
+        return container -> container.addErrorPages(new ErrorPage(MultipartException.class, "/uploadError"));
+    }
 
 //    @Bean
 //    public MultipartConfigElement multipartConfigElement() {
