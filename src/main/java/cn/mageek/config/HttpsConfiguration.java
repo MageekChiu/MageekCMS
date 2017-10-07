@@ -23,7 +23,7 @@ public class HttpsConfiguration {
     private Connector httpConnector() throws IOException{
         Connector connector = new Connector(Http11NioProtocol.class.getName());
         Http11NioProtocol protocol = (Http11NioProtocol) connector.getProtocolHandler();
-        connector.setPort(8999);
+        connector.setPort(8998);
         connector.setSecure(true);
         connector.setScheme("https");
         protocol.setSSLEnabled(true);

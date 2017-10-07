@@ -10,6 +10,10 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .requiresChannel().anyRequest().requiresSecure()
+                //通过Spring security将http转到https
+                // 但是默认转到了 8443
+                .and()
                 .formLogin()
                 .loginPage("/login")//自定义登录页
                 .defaultSuccessUrl("/form")
@@ -19,5 +23,10 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/webjars/**", "/login", "/signin/**", "/signup").permitAll()
                 .anyRequest().authenticated();
+
+        //自定义https端口
+        http
+                .portMapper()
+                .http(8080).mapsTo(8998);
     }
 }
