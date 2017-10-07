@@ -74,6 +74,7 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
     }
 
 
+
     /* 中文乱码问题 */
 //    //原来不是乱码问题 而是新建的这个 message_cn 居然是gb2312 要把idea文件默认格式改为utf8才行
 //    //File->Other Settings->Default Settings->Editor->File Encodings ，这儿设置的是默认的文件编码方式，所有新建的工程使用的都是默认的文件编码方式。

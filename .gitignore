@@ -27,3 +27,6 @@ pictures/*.gif
 pictures/*.png
 pictures/*.jpg
 pictures/*.jpeg
+
+*.keystore
+*.https.properties

@@ -53,7 +53,7 @@ public class UploadController {
     @RequestMapping(value = "/upload",method = RequestMethod.POST)
     public String uploadImage(MultipartFile file,
                               RedirectAttributes ra, Locale locale) throws IOException{
-        if (file.isEmpty() || file.getSize()>50){
+        if (file.isEmpty() || file.getSize()>50000){
 //            ra.addFlashAttribute("error", ExceptionI18Message.getLocaleMessage("uploadSizeError") );//传递国际化消息
 //            ra.addFlashAttribute("error", messageSource.getMessage("uploadSizeError",null,locale) );//也可以传递国际化消息
 //            return "redirect:/upload";
