@@ -6,6 +6,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 @RestController
 public class RestTestController {
 
@@ -13,6 +17,9 @@ public class RestTestController {
     public Form hello(){
         Form form = new Form();
         form.setName("jobs");
+        form.setEmail("12121@qq.com");
+        form.setHobbies(Arrays.asList("特殊", "212", "奥迪"));
+        form.setBirthDate(LocalDate.now());
         return form;
     }
 
