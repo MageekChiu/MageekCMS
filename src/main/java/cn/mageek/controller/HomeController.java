@@ -6,6 +6,7 @@ import jdk.nashorn.internal.ir.ReturnNode;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.ClassUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -21,6 +22,8 @@ public class HomeController {
     public String hello(@RequestParam(name = "name",defaultValue = "default") String name,
                         Model model){
         model.addAttribute("message","message from controller,hello "+name);
+        System.out.println(ClassUtils.getDefaultClassLoader().getResource("").getPath());//class文件的根目录
+        System.out.println(System.getProperty("mc.root"));//获取根目录，不知道是啥
         return "index";
     }
 

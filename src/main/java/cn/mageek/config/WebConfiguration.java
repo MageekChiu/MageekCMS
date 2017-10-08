@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.ErrorPage;
+import org.springframework.boot.web.servlet.ServletContextInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -17,13 +18,24 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
+import org.springframework.web.util.WebAppRootListener;
 
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 import java.time.LocalDate;
 import java.util.Locale;
 
 @Configuration
 @EnableConfigurationProperties({PictureUploadProperties.class})//自定义属性
-public class WebConfiguration extends WebMvcConfigurerAdapter {
+public class WebConfiguration extends WebMvcConfigurerAdapter implements ServletContextInitializer {
+
+    @Override
+//    添加WebAppRootListener监听器
+    public void onStartup(ServletContext servletContext) throws ServletException {
+        servletContext.addListener(WebAppRootListener.class);
+        servletContext.setInitParameter("webAppRootKey","mc.root");
+    }
+
     /* 日期格式化、国际化问题 */
     @Override
     public void addFormatters(FormatterRegistry registry) {

@@ -14,27 +14,15 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Enumeration;
 import java.util.Map;
 
-@Component
-@Aspect
+//@Component
+//@Aspect
 public class WebControllerAop {
 
     //切点 匹配包及其子包下的所有类的所有方法
     @Pointcut("execution(* cn.mageek.controller..*.*(..))")
     public void executeService(){   }
 //    http://localhost:8080/upload  @ModelAttribute 表现有些奇怪
-
-//    环绕通知：
-    @Around("execution(* cn.mageek.controller.HomeController..*.*(..))")
-    public Object doAroundAdvice(ProceedingJoinPoint proceedingJoinPoint){
-        System.out.println("环绕通知的目标方法名："+proceedingJoinPoint.getSignature().getName());
-        try {
-            Object obj = proceedingJoinPoint.proceed();
-            return obj;
-        } catch (Throwable throwable) {
-            throwable.printStackTrace();
-        }
-        return null;
-    }
+//    另外 加入cache的方法貌似不受aop支持
 
 
     //前置通知 使用切点
@@ -96,5 +84,19 @@ public class WebControllerAop {
     public void doAfterAdvice(JoinPoint joinPoint){
 
         System.out.println("后置通知执行了!!!!");
+    }
+
+
+    //    环绕通知：
+    @Around("execution(* cn.mageek.controller.HomeController..*.*(..))")
+    public Object doAroundAdvice(ProceedingJoinPoint proceedingJoinPoint){
+        System.out.println("环绕通知的目标方法名："+proceedingJoinPoint.getSignature().getName());
+        try {
+            Object obj = proceedingJoinPoint.proceed();
+            return obj;
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+        return null;
     }
 }
