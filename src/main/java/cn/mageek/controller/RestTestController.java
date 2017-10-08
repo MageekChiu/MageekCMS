@@ -1,6 +1,7 @@
 package cn.mageek.controller;
 
 import cn.mageek.pojo.Form;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @RestController
 public class RestTestController {
+
+
 
     private static AtomicInteger visit = new AtomicInteger(0);
     @RequestMapping("/rest")
@@ -40,4 +43,6 @@ public class RestTestController {
         httpStatus = HttpStatus.CREATED;//201 CREATED
         return new ResponseEntity<>(new Form(),httpStatus);
     }
+
+
 }
