@@ -28,7 +28,9 @@ pictures/*.png
 pictures/*.jpg
 pictures/*.jpeg
 
+
 *.keystore
-*.https.properties
 /src/main/resources/application.properties
+
+
 
