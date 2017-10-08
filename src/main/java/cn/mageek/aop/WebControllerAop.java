@@ -22,7 +22,7 @@ public class WebControllerAop {
     @Pointcut("execution(* cn.mageek.controller..*.*(..))")
     public void executeService(){   }
 //    http://localhost:8080/upload  @ModelAttribute 表现有些奇怪
-//    另外 加入cache的方法貌似不受aop支持
+//    另外 加入 @Cacheable的方法貌似不受aop支持
 
 
     //前置通知 使用切点
