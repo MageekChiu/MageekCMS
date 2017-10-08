@@ -107,4 +107,6 @@ public class UploadController {
     private static String getFileExtension(String name){
         return name.substring(name.lastIndexOf("."));
     }
+
+
 }
