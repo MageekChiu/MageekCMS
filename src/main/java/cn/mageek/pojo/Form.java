@@ -7,12 +7,13 @@ import org.springframework.context.annotation.Scope;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class Form {
+public class Form  implements Serializable{
 
     @Size(min = 2,max = 20)
     private String name;
