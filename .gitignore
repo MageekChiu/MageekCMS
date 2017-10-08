@@ -30,7 +30,7 @@ pictures/*.jpeg
 
 
 *.keystore
-/src/main/resources/application.properties
+#/src/main/resources/application.properties
 
 
 
