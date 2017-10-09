@@ -1,6 +1,8 @@
 package cn.mageek.controller;
 
 import cn.mageek.pojo.Form;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
@@ -16,7 +18,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 @RestController
 public class RestTestController {
 
-
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private static AtomicInteger visit = new AtomicInteger(0);
     @RequestMapping("/rest")
@@ -39,8 +41,9 @@ public class RestTestController {
 
     @RequestMapping("/restentry")
     public ResponseEntity<Form> restentry(){
+        logger.debug("esssddsfdfsdfsdfds");
         HttpStatus httpStatus = HttpStatus.OK;
-        httpStatus = HttpStatus.CREATED;//201 CREATED
+//        httpStatus = HttpStatus.CREATED;//201 CREATED
         return new ResponseEntity<>(new Form(),httpStatus);
     }
 
