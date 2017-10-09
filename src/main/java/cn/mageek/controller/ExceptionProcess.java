@@ -28,6 +28,6 @@ public class ExceptionProcess {
         model.addAttribute("msg","全局可见，所有标记了requestmapping的方法都可以获取");
     }
 
-    
+
 
 }
