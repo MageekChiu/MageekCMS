@@ -2,10 +2,8 @@ package cn.mageek.config;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.CacheManager;
-import org.springframework.cache.concurrent.ConcurrentMapCache;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -18,6 +16,7 @@ import java.util.Arrays;
 @Profile("redis")
 @EnableRedisHttpSession
 public class RedisConfig {
+
     @Bean(name="objectRedisTemplate")
     public RedisTemplate objectRedisTemplate(RedisConnectionFactory redisConnectionFactory){
         RedisTemplate<Object,Object> template = new RedisTemplate<>();
@@ -33,4 +32,7 @@ public class RedisConfig {
         redisCacheManager.setDefaultExpiration(36_000);
         return redisCacheManager;
     }
+
+    
+
 }
