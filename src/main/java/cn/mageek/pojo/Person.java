@@ -1,19 +1,18 @@
 package cn.mageek.pojo;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.NamedQuery;
+import javax.persistence.*;
 
-@Entity //1
-@NamedQuery(name = "Person.withNameAndAddressNamedQuery",
+//NamedQuery查询
+@Entity // 会自动生成该table
+@NamedQuery(name = "Person.findByNameAndAddress",
 query = "select p from Person p where p.name=?1 and address=?2")
 public class Person {
-	@Id //2
-	@GeneratedValue //3
+	@Id //2 主键
+	@GeneratedValue //3 自增
 	private Long id;
-	
-	private String name;
+
+    @Column(nullable = false)
+    private String name;
 	
 	private Integer age;
 	

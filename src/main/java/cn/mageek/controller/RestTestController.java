@@ -1,26 +1,35 @@
 package cn.mageek.controller;
 
 import cn.mageek.pojo.Form;
+import cn.mageek.pojo.Person;
+import cn.mageek.service.PersonService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @RestController
 public class RestTestController {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
-
+    private final PersonService personService;
     private static AtomicInteger visit = new AtomicInteger(0);
+
+    @Autowired
+    public RestTestController(PersonService personService) {
+        this.personService = personService;
+    }
+
     @RequestMapping("/rest")
     @Cacheable("searches")
     public Form hello(){
@@ -45,6 +54,17 @@ public class RestTestController {
         HttpStatus httpStatus = HttpStatus.OK;
 //        httpStatus = HttpStatus.CREATED;//201 CREATED
         return new ResponseEntity<>(new Form(),httpStatus);
+    }
+
+    @RequestMapping(value="/person/{address}")
+    public List<Person> getPersonByAddress(@PathVariable String address){
+        List<Person> personList = null;
+        try {
+            personList = personService.findByAddress(address);
+        }catch (Exception e){
+            logger.error(e.getMessage());
+        }
+        return  personList;
     }
 
 
