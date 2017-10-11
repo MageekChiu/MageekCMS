@@ -2,6 +2,7 @@ package cn.mageek.controller;
 
 import cn.mageek.pojo.Form;
 import cn.mageek.pojo.Person;
+import cn.mageek.rabbitmq.Sender;
 import cn.mageek.service.PersonService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,11 +30,12 @@ public class RestTestController {
     private final PersonService personService;
     private static AtomicInteger visit = new AtomicInteger(0);
     private final RedisTemplate redisTemplate;
-
+    private final Sender sender;
     @Autowired
-    public RestTestController(PersonService personService, RedisTemplate redisTemplate) {
+    public RestTestController(PersonService personService, RedisTemplate redisTemplate, Sender sender) {
         this.personService = personService;
         this.redisTemplate = redisTemplate;
+        this.sender = sender;
     }
 
     @RequestMapping("/rest")
@@ -85,6 +87,12 @@ public class RestTestController {
         valueOperations.set("add","asdasdsadsad");
         return valueOperations.get("add");
 
+    }
+
+    @RequestMapping("/send")
+    public String send(@RequestParam(name = "msg",defaultValue = "default") String msg ) {
+        sender.send(msg);
+        return "Send OK.";
     }
 
 
