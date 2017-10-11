@@ -11,6 +11,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -61,6 +62,7 @@ public class RestTestController {
         return new ResponseEntity<>(new Form(),httpStatus);
     }
 
+    @Transactional
     @RequestMapping(value="/person/{address}")
     public List<Person> getPersonByAddress(@PathVariable String address){
         List<Person> personList = null;
